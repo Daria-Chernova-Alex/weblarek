@@ -1,4 +1,4 @@
-import { IBuyer, TPayment } from '../../types';
+import { IBuyer, TPayment, BuyerValidationErrors } from '../../types';
 
 export class Buyer {
     private payment: TPayment | null = null;
@@ -45,8 +45,8 @@ export class Buyer {
         this.phone = '';
     }
 
-    validate(): Partial<Record<keyof IBuyer, string>> { // В результирующем объекте не обязаны быть все поля. Если поле валидно, его не будет в объекте (возвращаем только ошибки)
-        const currentErrors: Partial<Record<keyof IBuyer, string>> = {};
+    validate(): BuyerValidationErrors { // В результирующем объекте не обязаны быть все поля. Если поле валидно, его не будет в объекте (возвращаем только ошибки)
+        const currentErrors: BuyerValidationErrors = {};
 
         if (!this.payment) {
             currentErrors.payment = 'Не выбран вид оплаты';
